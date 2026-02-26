@@ -1,12 +1,23 @@
-// Simple Todo model placeholder
-// You can replace with Mongoose or another ORM later
+const mongoose = require('mongoose');
 
-class Todo {
-    constructor(id, title, completed = false) {
-        this.id = id;
-        this.title = title;
-        this.completed = completed;
-    }
-}
+const todoSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    completed: {
+      type: Boolean,
+      default: false,
+    },
+    priority: {
+      type: String,
+      enum: ['low', 'medium', 'high'],
+      default: 'medium',
+    },
+  },
+  { timestamps: true }
+);
 
-module.exports = Todo;
+module.exports = mongoose.model('Todo', todoSchema);
