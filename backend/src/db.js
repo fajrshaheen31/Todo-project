@@ -1,8 +1,13 @@
-// Simple in-memory database for todos
+const mongoose = require('mongoose');
 
-let todos = [];
-
-module.exports = {
-    getAll: () => todos,
-    add: (todo) => todos.push(todo),
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log('MongoDB connected');
+  } catch (err) {
+    console.error('MongoDB connection error:', err.message);
+    process.exit(1);
+  }
 };
+
+module.exports = connectDB;
