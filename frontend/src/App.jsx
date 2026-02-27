@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-const API = 'http://localhost:5000/api/todos'
+// use VITE_API_URL from environment (set during build/deploy) or fall back to localhost
+const API = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/todos'  // e.g. "https://todo-api.example.com/api/todos"
 
 const priorityColors = {
   low: 'var(--low)',
