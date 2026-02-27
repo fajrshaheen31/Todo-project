@@ -9,7 +9,11 @@ const PORT = process.env.PORT || 5000;
 
 connectDB();
 
-app.use(cors({ origin: 'http://localhost:5173' }));
+// allow requests from the frontend; in production set CORS_ORIGIN to your deployed client URL
+const corsOptions = {
+  origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use('/api/todos', todoRoutes);
